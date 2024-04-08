@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-		</style>
-        <link rel="stylesheet" href="./index.css">
-	</head>
-	<body>
-		<script type="module" src="/main.js"></script>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>My first three.js app</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+
+    <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="absolute p-4 bg-white rounded shadow m-4">
+		<h2>CUP</h2>
+      <input name="white-carton" id="white-carton" type="checkbox" />
+      <label for="white-carton">Carton/White Finger</label>
+	  <div>
+		<input type="color" id="input-color" name="head" defaultValue="#000000" />
+		<label for="head">Choose color</label>
+	  </div>
+    </div>
+	<div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>
