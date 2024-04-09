@@ -81,8 +81,8 @@ load();
 
 const textureLoader = new THREE.TextureLoader();
 
-whiteTexture = textureLoader.load("image/FingerPrints.jpg");
-cartonTexture = textureLoader.load("image/carton.jpg");
+whiteTexture = textureLoader.load("/image/FingerPrints.jpg");
+cartonTexture = textureLoader.load("/image/carton.jpg");
 
 function load() {
   const loadingManager = new THREE.LoadingManager();
@@ -94,7 +94,7 @@ function load() {
   const loader = new GLTFLoader();
 
   loader.load(
-    "./models/cup2.gltf",
+    "/models/cup2.gltf",
     function (gltf) {
       gltf.scene.traverse(function (child) {
         if (child.isMesh) {
