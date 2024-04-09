@@ -6,7 +6,7 @@ class Plane {
   }
   create() {
     //Create a plane that receives shadows (but does not cast them)
-    const planeGeometry = new THREE.PlaneGeometry(50, 50);
+    const planeGeometry = new THREE.PlaneGeometry(20, 20);
     const planeMaterial = new THREE.MeshStandardMaterial({
       color: "#ffffff",
       side: THREE.DoubleSide,

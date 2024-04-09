@@ -1,30 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>My first three.js app</title>
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
 
-    <link rel="stylesheet" href="./index.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <div class="absolute p-4 bg-white rounded shadow m-4">
-		<h2>CUP</h2>
+<head>
+  <meta charset="utf-8" />
+  <title>ThreeJS Light/Shadow</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="absolute flex flex-col gap-2 p-4 bg-white rounded shadow m-4">
+    <h2 class="font-bold ">CUP</h2>
+    <div>
+      <input id="userImage" type="file" accept=".png,.jpg"/> <br/>
+    </div>
+    <div>
       <input name="white-carton" id="white-carton" type="checkbox" />
       <label for="white-carton">Carton/White Finger</label>
-	  <div>
-		<input type="color" id="input-color" name="head" defaultValue="#000000" />
-		<label for="head">Choose color</label>
-	  </div>
     </div>
-	<div>
+ 
+    <div>
+      <input type="color" id="input-color" name="head" defaultValue="#000000" />
+      <label for="head">Choose color</label>
+    </div>
+    <div class=" flex gap-2">
+      <div class="flex flex-col">
+        <input type="number" value="12" class="border text-center px-2 py-1 w-14 rounded-md focus:outline-none ring-offset-slate-500" name="cup-x" id="cup-x" placeholder="x" />
+      </div>
+      <div class="flex flex-col">
+        <input type="number" value="0"  class="border text-center px-2 py-1 w-14 rounded-md focus:outline-none ring-offset-slate-500" name="cup-y" id="cup-y" placeholder="y" />
+      </div>
+      <div class="flex flex-col">
+        <input type="number" value="8"  class="border text-center px-2 py-1 w-14 rounded-md focus:outline-none ring-offset-slate-500" name="cup-z" id="cup-z" placeholder="z" />
+      </div>
+    </div>
+   
+
+  </div>
+  <div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="module" src="/main.js"></script>
-  </body>
+</body>
+
+<style>
+
+</style>
+
 </html>
