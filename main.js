@@ -7,6 +7,7 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { LightProbeGenerator } from "three/addons/lights/LightProbeGenerator.js";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DragControls } from 'three/addons/controls/DragControls.js';
 
 import Cube from './cube';
 import Load3D from './gtlfloader';
@@ -28,13 +29,101 @@ document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
+
+
 // ================ BOX ===============
 
 const cubeClass = new Cube(scene);
-const cube = cubeClass.createCube(1, 1, 2);
+// const cube = cubeClass.createCube(1, 1, 2);
 const cube1 = cubeClass.createCube(1, 1, 1);
-const cube2 = cubeClass.createCube(1, 1, 3);
+// const cube2 = cubeClass.createCube(1, 1, 3);
 
+let enableSelection = false
+const mouse = new THREE.Vector2();
+const raycaster = new THREE.Raycaster();
+const dragControls = new DragControls([cube1], camera, renderer.domElement);
+
+
+dragControls.addEventListener('drag', () => {
+  controls.enabled = false;
+  renderer.render(scene, camera);
+});
+
+dragControls.addEventListener('dragstart', function (event) {
+  controls.enabled = false;
+
+});
+
+dragControls.addEventListener('dragend', function (event) {
+  controls.enabled = true;
+
+});
+function onKeyDown(event) {
+  enableSelection = true
+}
+
+document.addEventListener('click', onClick);
+window.addEventListener('keydown', onKeyDown);
+window.addEventListener('resize', onWindowResize);
+
+function onWindowResize() {
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  renderer.render(scene, camera);
+
+}
+
+function onClick(event) {
+  event.preventDefault();
+
+  if (enableSelection === true) {
+    const draggableObjects = controls.getObjects();
+    draggableObjects.length = 0;
+
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    const intersections = raycaster.intersectObjects(objects, true);
+
+    if (intersections.length > 0) {
+
+      const object = intersections[0].object;
+
+      if (group.children.includes(object) === true) {
+
+        object.material.emissive.set(0x000000);
+        scene.attach(object);
+
+      } else {
+
+        object.material.emissive.set(0xaaaaaa);
+        group.attach(object);
+
+      }
+
+      controls.transformGroup = true;
+      draggableObjects.push(group);
+
+    }
+
+    if (group.children.length === 0) {
+
+      controls.transformGroup = false;
+      draggableObjects.push(...objects);
+
+    }
+
+  }
+
+  renderer.render(scene, camera);
+
+}
 ////
 
 const load3D = new Load3D(scene);
@@ -97,7 +186,7 @@ jqWhiteCarton.click(function () {
 
 import "./input-upload"
 
-camera.position.set(20, 20, 3);
+camera.position.set(10, 0, 10);
 
 
 
@@ -128,7 +217,7 @@ scene.add(arrowHelper2);
 function animate() {
   requestAnimationFrame(animate);
   // cube.rotation.y += 0.01;
-  cube1.rotation.x += 0.01;
+  // cube1.rotation.x += 0.01;
 
 
   if (lib) {
@@ -141,7 +230,6 @@ function animate() {
   //   cupInside.rotation.z += 0.01;
   // }
 
-  controls.update();
   renderer.render(scene, camera);
 }
 
